@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taxi Podgorica - Dostupan?</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: white;
+      transition: background-color 0.3s ease;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 420px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-weight: normal;
+    }
+
+    .status {
+      font-size: 34px;
+      font-weight: bold;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    .available {
+      background-color: #2ecc71;
+    }
+
+    .not-available {
+      background-color: #e74c3c;
+    }
+
+    .hours {
+      background: white;
+      color: black;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .contact button {
+      width: 220px;
+      padding: 15px;
+      margin: 8px;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .phone {
+      background: #007bff;
+    }
+
+    .whatsapp {
+      background: #25D366;
+    }
+
+    .viber {
+      background: #7360F2;
+    }
+  </style>
+</head>
+
+<body id="body">
+
+<div class="container">
+
+  <h1>🚕 Taxi Podgorica</h1>
+  <h2>Nikola</h2>
+
+  <div id="status" class="status"></div>
+
+  <div class="hours">
+    <strong>Radno vrijeme:</strong><br>
+    Ponedjeljak – Petak<br>
+    06:00 – 15:00
+  </div>
+
+  <div class="contact">
+    <button class="phone"
+      onclick="window.location.href='tel:068053065'">
+      📞 Pozovi
+    </button>
+    <br>
+
+    <button class="whatsapp"
+      onclick="window.location.href='https://wa.me/38268053065'">
+      WhatsApp
+    </button>
+
+    <button class="viber"
+      onclick="window.location.href='viber://chat?number=%2B38268053065'">
+      Viber
+    </button>
+  </div>
+
+</div>
+
+<script>
+  function isAvailable() {
+    const now = new Date();
+
+    const day = now.getDay();
+    // 0 = Sunday, 6 = Saturday
+    if (day === 0 || day === 6) {
+      return false;
+    }
+
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
+    const currentTime = currentHour + currentMinutes / 60;
+
+    return currentTime >= 6 && currentTime < 15;
+  }
+
+  const statusDiv = document.getElementById("status");
+  const body = document.getElementById("body");
+
+  if (isAvailable()) {
+    statusDiv.className = "status available";
+    statusDiv.innerHTML = "✅ DOSTUPAN";
+    body.style.backgroundColor = "#2ecc71";
+  } else {
+    statusDiv.className = "status not-available";
+    statusDiv.innerHTML = "❌ NIJE DOSTUPAN";
+    body.style.backgroundColor = "#e74c3c";
+  }
+</script>
+
+</body>
+</html>
